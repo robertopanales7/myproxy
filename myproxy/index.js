@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
     res.redirect('/info');
 });
 
-// Fake posts data (acortado aquí, puedes pegar todos los objetos que quieras)
+// Static JSON data
 const posts = [
   {
     "userId": 1,
@@ -46,10 +46,9 @@ const posts = [
     "title": "ea molestias quasi exercitationem repellat qui ipsa sit aut",
     "body": "et iusto sed quo iure..."
   }
-  // ...continúa pegando los demás objetos aquí
 ];
 
-// Ruta para devolver los posts
+// Route to serve posts
 app.get('/json_placeholder/posts', (req, res) => {
     res.json(posts);
 });
