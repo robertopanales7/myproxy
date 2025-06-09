@@ -1,14 +1,11 @@
 {
   "name": "proxy-server",
   "version": "1.0.0",
-  "description": "Simple HTTPS proxy to jsonplaceholder.typicode.com",
   "main": "index.js",
+  "dependencies": {
+    "http-proxy": "^1.18.1"
+  },
   "scripts": {
     "start": "node index.js"
-  },
-  "dependencies": {
-    "express": "^4.18.2",
-    "http-proxy-middleware": "^2.0.6",
-    "morgan": "^1.10.0"
   }
 }
