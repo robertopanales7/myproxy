@@ -1,14 +1,15 @@
 {
-  "name": "simple-nodejs-proxy",
+  "name": "proxy-server",
   "version": "1.0.0",
+  "description": "HTTP/HTTPS proxy server compatible with Proxifier",
   "main": "index.js",
-  "license": "MIT",
-  "dependencies": {
-    "express": "^4.17.1",
-    "http-proxy-middleware": "^1.0.5",
-    "morgan": "^1.10.0"
-  },
   "scripts": {
     "start": "node index.js"
+  },
+  "dependencies": {
+    "http-proxy": "^1.18.1"
+  },
+  "engines": {
+    "node": ">=14"
   }
 }
