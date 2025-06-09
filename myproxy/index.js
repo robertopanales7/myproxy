@@ -1,45 +1,60 @@
 const express = require('express');
 const morgan = require("morgan");
-const { createProxyMiddleware } = require('http-proxy-middleware');
 
-// Create Express Server
 const app = express();
 
-// Configuration
 const PORT = process.env.PORT || 3000;
 const HOST = "0.0.0.0";
-const API_SERVICE_URL = "https://jsonplaceholder.typicode.com";
 
 // Logging
 app.use(morgan('dev'));
 
-// CORS headers (opcional pero útil si accedes desde navegador)
+// CORS (opcional pero recomendable)
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
     next();
 });
 
-// Info GET endpoint
-app.get('/info', (req, res, next) => {
-    res.send('✅ This is a proxy service which proxies to JSONPlaceholder API.');
+// Info
+app.get('/info', (req, res) => {
+    res.send('✅ This service returns static JSON data mimicking JSONPlaceholder.');
 });
 
-// Root redirect to /info
+// Root redirect
 app.get('/', (req, res) => {
     res.redirect('/info');
 });
 
-// Proxy endpoints (sin autenticación)
-app.use('/json_placeholder', createProxyMiddleware({
-    target: API_SERVICE_URL,
-    changeOrigin: true,
-    pathRewrite: {
-        [`^/json_placeholder`]: '',
-    },
-}));
+// Fake posts data (acortado aquí, puedes pegar todos los objetos que quieras)
+const posts = [
+  {
+    "userId": 1,
+    "id": 1,
+    "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+    "body": "quia et suscipit\nsuscipit recusandae..."
+  },
+  {
+    "userId": 1,
+    "id": 2,
+    "title": "qui est esse",
+    "body": "est rerum tempore vitae..."
+  },
+  {
+    "userId": 1,
+    "id": 3,
+    "title": "ea molestias quasi exercitationem repellat qui ipsa sit aut",
+    "body": "et iusto sed quo iure..."
+  }
+  // ...continúa pegando los demás objetos aquí
+];
 
-// Start Proxy
+// Ruta para devolver los posts
+app.get('/json_placeholder/posts', (req, res) => {
+    res.json(posts);
+});
+
+// Start server
 app.listen(PORT, HOST, () => {
-    console.log(`✅ Starting Proxy at ${HOST}:${PORT}`);
+    console.log(`✅ Server running at http://${HOST}:${PORT}`);
 });
