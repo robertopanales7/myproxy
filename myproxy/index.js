@@ -18,8 +18,8 @@ app.get('/info', (req, res, next) => {
     res.send('This is a proxy service which proxies to JSONPlaceholder API.');
 });
 
-// Authorization
-app.use('', (req, res, next) => {
+// Authorization only for proxy routes
+app.use('/json_placeholder', (req, res, next) => {
     if (req.headers.authorization) {
         next();
     } else {
