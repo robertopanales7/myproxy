@@ -6,8 +6,8 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 const app = express();
 
 // Configuration
-const PORT = 3000;
-const HOST = "localhost";
+const PORT = process.env.PORT || 3000;
+const HOST = "0.0.0.0";
 const API_SERVICE_URL = "https://jsonplaceholder.typicode.com";
 
 // Logging
